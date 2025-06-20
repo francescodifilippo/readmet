@@ -335,7 +335,9 @@ char *jsonEscapeString(const char *str) {
     if (str == NULL) return NULL;
     
     size_t len = strlen(str);
-    size_t escaped_len = len * 2 + 1; // Worst case scenario
+    // Each character could expand up to "\\u00XX" (6 characters)
+    // so allocate enough space for the worst case
+    size_t escaped_len = len * 6 + 1;
     
     char *escaped = (char *)malloc(escaped_len);
     if (escaped == NULL) {
@@ -733,7 +735,11 @@ void visualizeFileStatus(GapInfo *gaps, int numGaps, unsigned int fileSize, unsi
         printf("{\"visualization\":{");
         printf("\"total_size\":%u,\"total_size_mb\":%.2f,", fileSize, fileSize / 1048576.0);
         printf("\"downloaded\":%u,\"downloaded_mb\":%.2f,", downloadedBytes, downloadedBytes / 1048576.0);
-        printf("\"percentage\":%.1f,", (downloadedBytes * 100.0) / fileSize);
+        double perc = 0.0;
+        if (fileSize > 0) {
+            perc = (downloadedBytes * 100.0) / fileSize;
+        }
+        printf("\"percentage\":%.1f,", perc);
         
         // Gap statistics
         printf("\"gaps\":{\"count\":%d,", numGaps);
@@ -744,8 +750,12 @@ void visualizeFileStatus(GapInfo *gaps, int numGaps, unsigned int fileSize, unsi
                 totalGapSize += (gaps[i].end - gaps[i].start);
             }
             
-            printf("\"total_size\":%u,\"total_size_mb\":%.2f,\"percentage\":%.1f,", 
-                   totalGapSize, totalGapSize / 1048576.0, (totalGapSize * 100.0) / fileSize);
+            double gapPerc = 0.0;
+            if (fileSize > 0) {
+                gapPerc = (totalGapSize * 100.0) / fileSize;
+            }
+            printf("\"total_size\":%u,\"total_size_mb\":%.2f,\"percentage\":%.1f,",
+                   totalGapSize, totalGapSize / 1048576.0, gapPerc);
             
             // Add gap details
             printf("\"details\":[");
@@ -796,10 +806,14 @@ void visualizeFileStatus(GapInfo *gaps, int numGaps, unsigned int fileSize, unsi
         
         // Show basic info
         printf("Total size: %u bytes (%.2f MB)\n", fileSize, fileSize / 1048576.0);
-        printf("Downloaded: %u bytes (%.2f MB, %.1f%%)\n", 
-               downloadedBytes, 
+        double perc = 0.0;
+        if (fileSize > 0) {
+            perc = (downloadedBytes * 100.0) / fileSize;
+        }
+        printf("Downloaded: %u bytes (%.2f MB, %.1f%%)\n",
+               downloadedBytes,
                downloadedBytes / 1048576.0,
-               (downloadedBytes * 100.0) / fileSize);
+               perc);
         
         // Draw progress bar
         printf("[");
@@ -840,9 +854,13 @@ void visualizeFileStatus(GapInfo *gaps, int numGaps, unsigned int fileSize, unsi
                 totalGapSize += (gaps[i].end - gaps[i].start);
             }
             
-            printf("Total gap size: %.2f MB (%.1f%% of file)\n\n", 
+            double gapPerc = 0.0;
+            if (fileSize > 0) {
+                gapPerc = (totalGapSize * 100.0) / fileSize;
+            }
+            printf("Total gap size: %.2f MB (%.1f%% of file)\n\n",
                    totalGapSize / 1048576.0,
-                   (totalGapSize * 100.0) / fileSize);
+                   gapPerc);
         }
     }
 }
