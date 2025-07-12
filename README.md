@@ -1,17 +1,17 @@
-# Readmet
+# Metinfo
 
 ## English
 
 ### Description
-Readmet is a utility program designed to extract ED2K hashes from .part.met files used by the eDonkey2000/Overnet and eMule peer-to-peer file sharing networks. The program automatically detects the file format version (14.0 or 14.1) and extracts the MD4 hash that uniquely identifies the file in the network, as well as all meta tags contained within the file.
+Metinfo is a utility program designed to extract ED2K hashes from .part.met files used by the eDonkey2000/Overnet and eMule peer-to-peer file sharing networks. The program automatically detects the file format version (14.0 or 14.1) and extracts the MD4 hash that uniquely identifies the file in the network, as well as all meta tags contained within the file.
 
 ### Installation
-To compile and install readmet, follow these instructions:
+To compile and install metinfo, follow these instructions:
 
 ```bash
 # Clone or download the source code
 # Navigate to the project directory
-cd readmet
+cd metinfo
 
 # Compile the program
 make
@@ -23,53 +23,53 @@ sudo make install
 ### Usage
 ```bash
 # Basic usage (shows all meta tags)
-./readmet -f /path/to/file.part.met
+./metinfo -f /path/to/file.part.met
 
 # Display version information
-./readmet -V
+./metinfo -V
 
 # Display help information
-./readmet -h
+./metinfo -h
 
 # Show specific tag types
-./readmet -f /path/to/file.part.met -s  # Show only special tags
-./readmet -f /path/to/file.part.met -g  # Show only gap tags
-./readmet -f /path/to/file.part.met -t  # Show only standard tags
-./readmet -f /path/to/file.part.met -u  # Show only unknown tags
+./metinfo -f /path/to/file.part.met -s  # Show only special tags
+./metinfo -f /path/to/file.part.met -g  # Show only gap tags
+./metinfo -f /path/to/file.part.met -t  # Show only standard tags
+./metinfo -f /path/to/file.part.met -u  # Show only unknown tags
 
 # Visualize download status
-./readmet -f /path/to/file.part.met -z
+./metinfo -f /path/to/file.part.met -z
 
 # Detailed output
-./readmet -f /path/to/file.part.met -v
+./metinfo -f /path/to/file.part.met -v
 ```
 
 ### Script-Friendly Single Value Output
-For script integration, readmet provides options to output single values without labels or formatting:
+For script integration, metinfo provides options to output single values without labels or formatting:
 
 ```bash
 # Get only the filename 
-./readmet -f /path/to/file.part.met -n
+./metinfo -f /path/to/file.part.met -n
 # Output: example_movie.mkv
 
 # Get only the file size (in bytes)
-./readmet -f /path/to/file.part.met -S
+./metinfo -f /path/to/file.part.met -S
 # Output: 104857600
 
 # Get only the ED2K hash
-./readmet -f /path/to/file.part.met -e
+./metinfo -f /path/to/file.part.met -e
 # Output: E7D81234AB56C890DEF12345ABC67890
 
 # Get only the .part.met file version
-./readmet -f /path/to/file.part.met -m
+./metinfo -f /path/to/file.part.met -m
 # Output: 14.0
 
 # Get only the number of meta tags
-./readmet -f /path/to/file.part.met -c
+./metinfo -f /path/to/file.part.met -c
 # Output: 42
 
 # Get only the download progress percentage
-./readmet -f /path/to/file.part.met -p
+./metinfo -f /path/to/file.part.met -p
 # Output: 37.8
 ```
 
@@ -78,30 +78,30 @@ All information can be output in JSON format for easy integration with other too
 
 ```bash
 # Full JSON output
-./readmet -f /path/to/file.part.met -j
+./metinfo -f /path/to/file.part.met -j
 
 # Single value JSON output
-./readmet -f /path/to/file.part.met -e -j
+./metinfo -f /path/to/file.part.met -e -j
 # Output: {"ed2k_hash":"E7D81234AB56C890DEF12345ABC67890"}
 
-./readmet -f /path/to/file.part.met -m -j
+./metinfo -f /path/to/file.part.met -m -j
 # Output: {"format_version":"14.0"}
 ```
 
 ### Script Examples
 ```bash
 # Check if a file is completely downloaded
-if [ $(./readmet -f /path/to/file.part.met -p) = "100.0" ]; then
+if [ $(./metinfo -f /path/to/file.part.met -p) = "100.0" ]; then
     echo "Download complete!"
 else
     echo "Download in progress..."
 fi
 
 # Collect information about a download
-FILENAME=$(./readmet -f /path/to/file.part.met -n)
-SIZE=$(./readmet -f /path/to/file.part.met -S)
-PROGRESS=$(./readmet -f /path/to/file.part.met -p)
-HASH=$(./readmet -f /path/to/file.part.met -e)
+FILENAME=$(./metinfo -f /path/to/file.part.met -n)
+SIZE=$(./metinfo -f /path/to/file.part.met -S)
+PROGRESS=$(./metinfo -f /path/to/file.part.met -p)
+HASH=$(./metinfo -f /path/to/file.part.met -e)
 
 echo "File: $FILENAME"
 echo "Size: $SIZE bytes"
@@ -167,15 +167,15 @@ This program is provided as-is, without any express or implied warranty.
 ## Latin
 
 ### Descriptio
-Readmet est instrumentum ad extrahendum "ED2K tesserae" (nexus identificationis) ex "part.met" documentis quae in eDonkey2000/Overnet et eMule systemis communicationis inter pares (P2P) utuntur. Programma automatice formam documenti (14.0 vel 14.1) detegit et extrahit "MD4 tesseram" quae documentum in reti singulariter identificat, atque omnes meta indicationes in documento contentas.
+metinfo est instrumentum ad extrahendum "ED2K tesserae" (nexus identificationis) ex "part.met" documentis quae in eDonkey2000/Overnet et eMule systemis communicationis inter pares (P2P) utuntur. Programma automatice formam documenti (14.0 vel 14.1) detegit et extrahit "MD4 tesseram" quae documentum in reti singulariter identificat, atque omnes meta indicationes in documento contentas.
 
 ### Installatio
-Ad readmet compilandum et installandum, has instructiones sequere:
+Ad metinfo compilandum et installandum, has instructiones sequere:
 
 ```bash
 # Codicem fontem cape vel descarga
 # Ad directorium projecti naviga
-cd readmet
+cd metinfo
 
 # Programma compila
 make
@@ -187,29 +187,29 @@ sudo make install
 ### Usus
 ```bash
 # Usus fundamentalis (omnes meta indicationes monstrat)
-./readmet -f /via/ad/documentum.part.met
+./metinfo -f /via/ad/documentum.part.met
 
 # Exhibe informationem de versione
-./readmet -V
+./metinfo -V
 
 # Exhibe auxilium
-./readmet -h
+./metinfo -h
 ```
 
 ### Usus Pro Scriptis
-Pro scriptis, readmet praebet optiones ad producendum singulos valores sine etiquettis aut formatione:
+Pro scriptis, metinfo praebet optiones ad producendum singulos valores sine etiquettis aut formatione:
 
 ```bash
 # Solum nomen documenti obtine
-./readmet -f /via/ad/documentum.part.met -n
+./metinfo -f /via/ad/documentum.part.met -n
 # Exitus: exemplum_pellicula.mkv
 
 # Solum magnitudinem documenti obtine (in octettis)
-./readmet -f /via/ad/documentum.part.met -S
+./metinfo -f /via/ad/documentum.part.met -S
 # Exitus: 104857600
 
 # Solum ED2K tesseram obtine
-./readmet -f /via/ad/documentum.part.met -e
+./metinfo -f /via/ad/documentum.part.met -e
 # Exitus: E7D81234AB56C890DEF12345ABC67890
 ```
 
@@ -218,10 +218,10 @@ Omnis informatio potest in forma JSON produci:
 
 ```bash
 # Plenus exitus JSON
-./readmet -f /via/ad/documentum.part.met -j
+./metinfo -f /via/ad/documentum.part.met -j
 
 # Unius valoris exitus JSON
-./readmet -f /via/ad/documentum.part.met -e -j
+./metinfo -f /via/ad/documentum.part.met -e -j
 # Exitus: {"ed2k_hash":"E7D81234AB56C890DEF12345ABC67890"}
 ```
 
@@ -233,15 +233,15 @@ Hoc programma "sicut est" praebetur, sine ulla garantia expressa vel implicita.
 ## Italiano
 
 ### Descrizione
-Readmet è un programma di utilità progettato per estrarre gli hash ED2K dai file .part.met utilizzati dalle reti di condivisione file peer-to-peer eDonkey2000/Overnet ed eMule. Il programma rileva automaticamente la versione del formato del file (14.0 o 14.1) ed estrae l'hash MD4 che identifica in modo univoco il file nella rete, oltre a tutti i meta tag contenuti nel file.
+metinfo è un programma di utilità progettato per estrarre gli hash ED2K dai file .part.met utilizzati dalle reti di condivisione file peer-to-peer eDonkey2000/Overnet ed eMule. Il programma rileva automaticamente la versione del formato del file (14.0 o 14.1) ed estrae l'hash MD4 che identifica in modo univoco il file nella rete, oltre a tutti i meta tag contenuti nel file.
 
 ### Installazione
-Per compilare e installare readmet, segui queste istruzioni:
+Per compilare e installare metinfo, segui queste istruzioni:
 
 ```bash
 # Clona o scarica il codice sorgente
 # Naviga nella directory del progetto
-cd readmet
+cd metinfo
 
 # Compila il programma
 make
@@ -253,53 +253,53 @@ sudo make install
 ### Utilizzo
 ```bash
 # Utilizzo base (mostra tutti i meta tag)
-./readmet -f /percorso/al/file.part.met
+./metinfo -f /percorso/al/file.part.met
 
 # Visualizza informazioni sulla versione
-./readmet -V
+./metinfo -V
 
 # Visualizza informazioni di aiuto
-./readmet -h
+./metinfo -h
 
 # Visualizza tipi specifici di tag
-./readmet -f /percorso/al/file.part.met -s  # Mostra solo tag speciali
-./readmet -f /percorso/al/file.part.met -g  # Mostra solo tag gap
-./readmet -f /percorso/al/file.part.met -t  # Mostra solo tag standard
-./readmet -f /percorso/al/file.part.met -u  # Mostra solo tag sconosciuti
+./metinfo -f /percorso/al/file.part.met -s  # Mostra solo tag speciali
+./metinfo -f /percorso/al/file.part.met -g  # Mostra solo tag gap
+./metinfo -f /percorso/al/file.part.met -t  # Mostra solo tag standard
+./metinfo -f /percorso/al/file.part.met -u  # Mostra solo tag sconosciuti
 
 # Visualizza lo stato del download
-./readmet -f /percorso/al/file.part.met -z
+./metinfo -f /percorso/al/file.part.met -z
 
 # Output dettagliato
-./readmet -f /percorso/al/file.part.met -v
+./metinfo -f /percorso/al/file.part.met -v
 ```
 
 ### Output per Script
-Per l'integrazione con script, readmet fornisce opzioni per produrre valori singoli senza etichette o formattazione:
+Per l'integrazione con script, metinfo fornisce opzioni per produrre valori singoli senza etichette o formattazione:
 
 ```bash
 # Ottieni solo il nome del file
-./readmet -f /percorso/al/file.part.met -n
+./metinfo -f /percorso/al/file.part.met -n
 # Output: esempio_film.mkv
 
 # Ottieni solo la dimensione del file (in byte)
-./readmet -f /percorso/al/file.part.met -S
+./metinfo -f /percorso/al/file.part.met -S
 # Output: 104857600
 
 # Ottieni solo l'hash ED2K
-./readmet -f /percorso/al/file.part.met -e
+./metinfo -f /percorso/al/file.part.met -e
 # Output: E7D81234AB56C890DEF12345ABC67890
 
 # Ottieni solo la versione del file .part.met
-./readmet -f /percorso/al/file.part.met -m
+./metinfo -f /percorso/al/file.part.met -m
 # Output: 14.0
 
 # Ottieni solo il numero di meta tag
-./readmet -f /percorso/al/file.part.met -c
+./metinfo -f /percorso/al/file.part.met -c
 # Output: 42
 
 # Ottieni solo la percentuale di progresso del download
-./readmet -f /percorso/al/file.part.met -p
+./metinfo -f /percorso/al/file.part.met -p
 # Output: 37.8
 ```
 
@@ -308,27 +308,27 @@ Tutte le informazioni possono essere prodotte in formato JSON per una facile int
 
 ```bash
 # Output JSON completo
-./readmet -f /percorso/al/file.part.met -j
+./metinfo -f /percorso/al/file.part.met -j
 
 # Output JSON di un singolo valore
-./readmet -f /percorso/al/file.part.met -e -j
+./metinfo -f /percorso/al/file.part.met -e -j
 # Output: {"ed2k_hash":"E7D81234AB56C890DEF12345ABC67890"}
 ```
 
 ### Esempi di Script
 ```bash
 # Verifica se un file è completamente scaricato
-if [ $(./readmet -f /percorso/al/file.part.met -p) = "100.0" ]; then
+if [ $(./metinfo -f /percorso/al/file.part.met -p) = "100.0" ]; then
     echo "Download completato!"
 else
     echo "Download in corso..."
 fi
 
 # Raccogli informazioni su un download
-NOME_FILE=$(./readmet -f /percorso/al/file.part.met -n)
-DIMENSIONE=$(./readmet -f /percorso/al/file.part.met -S)
-PROGRESSO=$(./readmet -f /percorso/al/file.part.met -p)
-HASH=$(./readmet -f /percorso/al/file.part.met -e)
+NOME_FILE=$(./metinfo -f /percorso/al/file.part.met -n)
+DIMENSIONE=$(./metinfo -f /percorso/al/file.part.met -S)
+PROGRESSO=$(./metinfo -f /percorso/al/file.part.met -p)
+HASH=$(./metinfo -f /percorso/al/file.part.met -e)
 
 echo "File: $NOME_FILE"
 echo "Dimensione: $DIMENSIONE byte"
