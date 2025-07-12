@@ -1,16 +1,16 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -pedantic -std=c99 -O2
 LDFLAGS =
-EXECUTABLE = readmet
+EXECUTABLE = metinfo
 
 .PHONY: all clean install uninstall
 
 all: $(EXECUTABLE)
 
-$(EXECUTABLE): readmet.o
+$(EXECUTABLE): metinfo.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
-readmet.o: readmet.c
+metinfo.o: metinfo.c
 	$(CC) $(CFLAGS) -c $<
 
 clean:
